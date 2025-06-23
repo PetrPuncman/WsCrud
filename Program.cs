@@ -4,15 +4,15 @@ using Microsoft.Extensions.Hosting;
 using WsCrud.Interfaces;
 using WsCrud.Models;
 using WsCrud.Repositories;
+using WsCrud.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Controllers
+// Services
 builder.Services.AddControllers();
-
-// Swap in-memory repo for file-backed one
+builder.Services.AddSingleton<IFileStorage, FileSystemStorage>();
 builder.Services.AddSingleton<IRepository<Person>>(sp =>
-    new JsonPersonRepository("persons.json")); // flat file at app root
+    new JsonPersonRepository("persons.json", sp.GetRequiredService<IFileStorage>()));
 
 var app = builder.Build();
 

@@ -1,16 +1,42 @@
-﻿using WsCrud.Models;
+﻿using System.Text.Json;
 using WsCrud.Interfaces;
+using WsCrud.Models;
 
 namespace WsCrud.Repositories
 {
-    /// <summary>
-    /// An in-memory repository storing Person objects in a thread-safe list.
-    /// </summary>
-    public class InMemoryPersonRepository : IRepository<Person>
+    public class JsonPersonRepository : IRepository<Person>
     {
-        private readonly List<Person> _people = new();
-        private int _nextId = 1;
-        private readonly object _lock = new();
+        private readonly string _filePath;
+        private readonly IFileStorage _storage;
+        private readonly List<Person> _people;
+        private static readonly object _lock = new();
+
+        public JsonPersonRepository(string filePath, IFileStorage storage)
+        {
+            _filePath = filePath;
+            _storage = storage;
+            _people = Load();
+        }
+
+        private List<Person> Load()
+        {
+            lock (_lock)
+            {
+                if (!_storage.Exists(_filePath))
+                    return new();
+                var json = _storage.Read(_filePath);
+                return JsonSerializer.Deserialize<List<Person>>(json) ?? new();
+            }
+        }
+
+        private void Save()
+        {
+            lock (_lock)
+            {
+                var json = JsonSerializer.Serialize(_people, new JsonSerializerOptions { WriteIndented = true });
+                _storage.Write(_filePath, json);
+            }
+        }
 
         public Task<List<Person>> GetAllAsync()
         {
@@ -32,8 +58,9 @@ namespace WsCrud.Repositories
         {
             lock (_lock)
             {
-                person.Id = _nextId++;
+                person.Id = _people.Count > 0 ? _people.Max(p => p.Id) + 1 : 1;
                 _people.Add(person);
+                Save();
                 return Task.CompletedTask;
             }
         }
@@ -43,8 +70,11 @@ namespace WsCrud.Repositories
             lock (_lock)
             {
                 var index = _people.FindIndex(p => p.Id == person.Id);
-                if (index >= 0)
+                if (index != -1)
+                {
                     _people[index] = person;
+                    Save();
+                }
                 return Task.CompletedTask;
             }
         }
@@ -54,6 +84,7 @@ namespace WsCrud.Repositories
             lock (_lock)
             {
                 _people.RemoveAll(p => p.Id == id);
+                Save();
                 return Task.CompletedTask;
             }
         }
