@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WsCrud.Interfaces;
 using WsCrud.Models;
 
@@ -6,6 +7,7 @@ namespace WsCrud.Controllers
 {
     [ApiController]
     [Route("api/persons")]
+    [Authorize] // 🔒 Protect all routes
     public class PersonsController : ControllerBase
     {
         private readonly IRepository<Person> _repository;
