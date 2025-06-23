@@ -7,9 +7,12 @@ using WsCrud.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register controllers and repo
+// Controllers
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IRepository<Person>, InMemoryPersonRepository>();
+
+// Swap in-memory repo for file-backed one
+builder.Services.AddSingleton<IRepository<Person>>(sp =>
+    new JsonPersonRepository("persons.json")); // flat file at app root
 
 var app = builder.Build();
 
