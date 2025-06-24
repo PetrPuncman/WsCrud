@@ -672,3 +672,10 @@ obj/WsCrud.csproj.nuget.g.props
 obj/WsCrud.csproj.nuget.g.targets
 .vs/WsCrud/FileContentIndex/c52307a9-f0f0-4dc9-8497-00b32821c329.vsidx
 /.vs
+WsCrud/WsCrud.Tests/obj/WsCrud.Tests.csproj.nuget.g.targets
+WsCrud/WsCrud.Tests/obj/Debug/net9.0/WsCrud.Tests.assets.cache
+WsCrud/WsCrud.Tests/obj/Debug/net9.0/WsCrud.Tests.csproj.FileListAbsolute.txt
+WsCrud/WsCrud.Tests/obj/project.assets.json
+WsCrud/WsCrud.Tests/obj/project.nuget.cache
+WsCrud/WsCrud.Tests/obj/WsCrud.Tests.csproj.nuget.dgspec.json
+WsCrud/WsCrud.Tests/obj/WsCrud.Tests.csproj.nuget.g.props
