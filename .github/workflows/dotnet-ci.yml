@@ -19,13 +19,13 @@ jobs:
           dotnet-version: 9.0.x
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore WsCrud/WsCrud.sln
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build WsCrud/WsCrud.sln --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test WsCrud/WsCrud.Tests/WsCrud.Tests.csproj --no-build --verbosity normal
 
   deploy:
     needs: build
