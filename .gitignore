@@ -679,3 +679,10 @@ WsCrud/WsCrud.Tests/obj/project.assets.json
 WsCrud/WsCrud.Tests/obj/project.nuget.cache
 WsCrud/WsCrud.Tests/obj/WsCrud.Tests.csproj.nuget.dgspec.json
 WsCrud/WsCrud.Tests/obj/WsCrud.Tests.csproj.nuget.g.props
+WsCrud.Tests/obj/project.assets.json
+WsCrud.Tests/obj/Debug/net9.0/WsCrud.Tests.assets.cache
+WsCrud.Tests/obj/Debug/net9.0/WsCrud.Tests.csproj.FileListAbsolute.txt
+WsCrud.Tests/obj/project.nuget.cache
+WsCrud.Tests/obj/WsCrud.Tests.csproj.nuget.dgspec.json
+WsCrud.Tests/obj/WsCrud.Tests.csproj.nuget.g.props
+WsCrud.Tests/obj/WsCrud.Tests.csproj.nuget.g.targets
