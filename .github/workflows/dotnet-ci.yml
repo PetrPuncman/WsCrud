@@ -63,6 +63,9 @@ jobs:
           name: doxygen-pdf
           path: docs/latex/refman.pdf
 
+      - name: Copy PDF before switching branches
+        run: mkdir -p tmp && cp docs/latex/refman.pdf tmp/index.pdf
+
       - name: Deploy PDF to gh-pages branch
         run: |
           git config --global user.name "github-actions"
@@ -70,7 +73,7 @@ jobs:
           git fetch origin
           git switch gh-pages || git checkout --orphan gh-pages
           rm -rf *
-          cp docs/latex/refman.pdf index.pdf
+          cp tmp/index.pdf .
           git add index.pdf
           git commit -m "Update Doxygen PDF"
           git push origin gh-pages --force
