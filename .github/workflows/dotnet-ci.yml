@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-	with:
-    	  path: WsCrud
+        with:
+          path: WsCrud
 
       - name: Setup .NET 9
         uses: actions/setup-dotnet@v4
@@ -21,13 +21,13 @@ jobs:
           dotnet-version: 9.0.x
 
       - name: Restore dependencies
-        run: dotnet restore WsCrud.sln
+        run: dotnet restore WsCrud/WsCrud.sln
 
       - name: Build
-        run: dotnet build WsCrud.sln --no-restore --configuration Release
+        run: dotnet build WsCrud/WsCrud.sln --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test WsCrud.Tests/WsCrud.Tests.csproj --no-build --verbosity normal
+        run: dotnet test WsCrud/WsCrud.Tests/WsCrud.Tests.csproj --no-build --verbosity normal
 
   deploy:
     needs: build
