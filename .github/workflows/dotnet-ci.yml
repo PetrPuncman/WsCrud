@@ -43,12 +43,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Doxygen and LaTeX
+      - name: Install Doxygen and LaTeX (with Ghostscript)
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen make texlive-latex-base \
-            texlive-fonts-recommended texlive-latex-recommended \
-            texlive-latex-extra
+          sudo apt-get install -y doxygen make ghostscript \
+            texlive-latex-base texlive-fonts-recommended \
+            texlive-latex-recommended texlive-latex-extra
 
       - name: Generate LaTeX with Doxygen
         run: doxygen Doxyfile
