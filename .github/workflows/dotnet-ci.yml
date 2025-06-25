@@ -30,7 +30,7 @@ jobs:
 
       - name: Run tests
         working-directory: WsCrud
-        run: dotnet test WsCrud.Tests/WsCrud.Tests.csproj --no-build --verbosity normal
+        run: dotnet test WsCrud.Tests/WsCrud.Tests.csproj --no-build --configuration Release --verbosity normal
 
   deploy:
     needs: build
