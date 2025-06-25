@@ -57,14 +57,14 @@ jobs:
         working-directory: docs/latex
         run: make
 
+      - name: Preserve PDF before switching branches
+        run: mkdir -p tmp && cp docs/latex/refman.pdf tmp/index.pdf
+
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: doxygen-pdf
           path: docs/latex/refman.pdf
-
-      - name: Copy PDF before switching branches
-        run: mkdir -p tmp && cp docs/latex/refman.pdf tmp/index.pdf
 
       - name: Deploy PDF to gh-pages branch
         run: |
