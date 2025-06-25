@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36203.30
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsCrud", "WsCrud\WsCrud.csproj", "{64DADA05-88ED-4C3B-92BF-17BD9CB1DF30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsCrud", "WsCrud.csproj", "{64DADA05-88ED-4C3B-92BF-17BD9CB1DF30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsCrud.Tests", "WsCrud.Tests\WsCrud.Tests.csproj", "{0A4FDC76-F334-4450-9605-3B4ABD69F18C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsCrud.Tests", "WsCrud.Tests.csproj", "{0A4FDC76-F334-4450-9605-3B4ABD69F18C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
