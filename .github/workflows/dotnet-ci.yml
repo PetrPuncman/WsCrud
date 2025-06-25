@@ -57,23 +57,29 @@ jobs:
         working-directory: docs/latex
         run: make
 
-      - name: Preserve PDF before switching branches
-        run: mkdir -p tmp && cp docs/latex/refman.pdf tmp/index.pdf
-
-      - name: Upload PDF artifact
+      - name: Upload PDF for reuse
         uses: actions/upload-artifact@v4
         with:
-          name: doxygen-pdf
+          name: index-pdf
           path: docs/latex/refman.pdf
 
-      - name: Deploy PDF to gh-pages branch
+      - name: Switch to gh-pages branch
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git fetch origin
           git switch gh-pages || git checkout --orphan gh-pages
           rm -rf *
-          cp tmp/index.pdf .
+
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: index-pdf
+          path: .
+
+      - name: Rename and commit PDF
+        run: |
+          mv refman.pdf index.pdf
           git add index.pdf
           git commit -m "Update Doxygen PDF"
           git push origin gh-pages --force
