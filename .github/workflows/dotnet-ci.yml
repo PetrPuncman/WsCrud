@@ -28,8 +28,11 @@ jobs:
         working-directory: WsCrud
         run: dotnet build WsCrud.sln --no-restore --configuration Release
 
-      - name: Run tests
+      - name: Run tests with Basic Auth secrets
         working-directory: WsCrud
+        env:
+          AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
+          AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
         run: dotnet test WsCrud.Tests/WsCrud.Tests.csproj --no-build --configuration Release --verbosity normal
 
   docs:
